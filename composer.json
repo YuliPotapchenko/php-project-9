@@ -11,14 +11,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "julia",
-        },
+            "name": "julia"
+        }
     ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "monolog/monolog": "^2.8",
         "php-di/php-di": "^6.4",
+        "slim/php-view": "^3.2",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.10"
     },
