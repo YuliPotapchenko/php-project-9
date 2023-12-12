@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Controller\ListUrlsController;
+use App\Controller\ShowUrlsController;
 use App\Controller\AddUrlsController;
 use App\Controller\HomeController;
 use DI\ContainerBuilder;
@@ -37,5 +39,7 @@ $container->set(RouteCollectorInterface::class, fn() => $app->getRouteCollector(
 
 $app->get('/', HomeController::class)->setName('home');
 $app->post('/urls', AddUrlsController::class)->setName('addUrl');
+$app->get('/urls/{id}', ShowUrlsController::class)->setName('url');
+$app->get('/urls', ListUrlsController::class)->setName('urls');
 
 $app->run();

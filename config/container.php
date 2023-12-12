@@ -14,4 +14,5 @@ return [
     Twig::class                        => fn() => Twig::create('../templates'),
     Messages::class                    => fn() => new Messages(),
     PDO::class                         => fn() => DbConnection::get()->connect(),
+    UrlRepositoryInterface::class      => DI\autowire(DbUrlRepository::class)
 ];
