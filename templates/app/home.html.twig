@@ -6,7 +6,7 @@
             <h1 class="display-3">Анализатор страниц</h1>
             <p class="lead">Бесплатно проверяйте сайты на SEO пригодность</p>
 
-            <form action="" method="post" class="d-flex flex-wrap flex-sm-nowrap">
+            <form action="{{ url_for('addUrl') }}" method="post" class="d-flex flex-wrap flex-sm-nowrap">
                 <div class="flex-grow-1">
                     <input type="text" name="url[name]" value=""
                            class="form-control form-control-lg {% if errors.name %}is-invalid{% endif %}"
