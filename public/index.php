@@ -12,11 +12,8 @@ use Slim\Factory\AppFactory;
 use Slim\Interfaces\RouteCollectorInterface;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
-use Valitron\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
-
-Validator::lang('ru');
 
 $container = (new ContainerBuilder())
     ->addDefinitions(__DIR__ . '/../config/container.php')
