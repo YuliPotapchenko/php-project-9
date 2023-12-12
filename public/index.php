@@ -3,10 +3,7 @@
 declare(strict_types=1);
 
 use App\Controller\AddUrlsController;
-use App\Controller\CheckUrlsController;
 use App\Controller\HomeController;
-use App\Controller\ListUrlsController;
-use App\Controller\ShowUrlsController;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Interfaces\RouteCollectorInterface;
@@ -39,5 +36,6 @@ $app->addErrorMiddleware(true, true, true);
 $container->set(RouteCollectorInterface::class, fn() => $app->getRouteCollector());
 
 $app->get('/', HomeController::class)->setName('home');
+$app->post('/urls', AddUrlsController::class)->setName('addUrl');
 
 $app->run();
