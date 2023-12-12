@@ -16,9 +16,6 @@ use Valitron\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable(dirname(__DIR__));
-$dotenv->safeLoad();
-
 Validator::lang('ru');
 
 $container = (new ContainerBuilder())
