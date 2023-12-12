@@ -13,5 +13,5 @@ use Slim\Views\Twig;
 return [
     Twig::class                        => fn() => Twig::create('../templates'),
     Messages::class                    => fn() => new Messages(),
-    'commands'                         => fn() => require __DIR__ . '/commands.php',
+    PDO::class                         => fn() => DbConnection::get()->connect(),
 ];
