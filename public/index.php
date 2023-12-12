@@ -12,8 +12,14 @@ use Slim\Factory\AppFactory;
 use Slim\Interfaces\RouteCollectorInterface;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
+use Valitron\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(dirname(__DIR__));
+$dotenv->safeLoad();
+
+Validator::lang('ru');
 
 $container = (new ContainerBuilder())
     ->addDefinitions(__DIR__ . '/../config/container.php')
@@ -33,4 +39,5 @@ $app->addErrorMiddleware(true, true, true);
 $container->set(RouteCollectorInterface::class, fn() => $app->getRouteCollector());
 
 $app->get('/', HomeController::class)->setName('home');
+
 $app->run();

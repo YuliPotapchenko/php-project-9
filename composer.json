@@ -22,7 +22,16 @@
         "slim/php-view": "^3.2",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.10",
-        "slim/twig-view": "^3.3"
+        "slim/twig-view": "^3.3",
+        "slim/http": "^1.3",
+        "vlucas/valitron": "^1.4",
+        "slim/flash": "^0.4.0",
+        "vlucas/phpdotenv": "^5.5",
+        "ext-pdo": "*",
+        "symfony/console": "^6.0",
+        "guzzlehttp/guzzle": "^7.5",
+        "imangazaliev/didom": "^2.0",
+        "illuminate/support": "^9.52"
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^1.0.0",
