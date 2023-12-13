@@ -15,15 +15,6 @@ use Valitron\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use PostgreSQLTutorial\Connection;
-
-try {
-    Connection::get()->connect();
-    echo 'A connection to the PostgreSQL database sever has been established successfully.';
-} catch (\PDOException $e) {
-    echo $e->getMessage();
-}
-
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(dirname(__DIR__));
 $dotenv->safeLoad();
 
