@@ -6,7 +6,7 @@ namespace App\Service;
 
 use PDO;
 
-class DbConnection
+class Connection
 {
     private static ?self $conn = null;
 
@@ -16,7 +16,7 @@ class DbConnection
 
     public function connect(): PDO
     {
-        $databaseUrl = parse_url(getenv('DATABASE_URL') ? : '');
+        $databaseUrl = parse_ini_file('database.ini');
 
         $dsn = sprintf(
             "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
