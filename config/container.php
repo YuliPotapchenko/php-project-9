@@ -13,6 +13,6 @@ use Slim\Views\Twig;
 return [
     Twig::class                        => fn() => Twig::create('../templates'),
     Messages::class                    => fn() => new Messages(),
-    PDO::class                         => fn() => Connection::get()->connect(),
+    //PDO::class                         => fn() => Connection::get()->connect(),
     UrlRepositoryInterface::class      => DI\autowire(DbUrlRepository::class)
 ];

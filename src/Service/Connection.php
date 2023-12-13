@@ -1,44 +1,62 @@
 <?php
 
-declare(strict_types=1);
+namespace PostgreSQLTutorial;
 
-namespace App\Service;
-
-use PDO;
-
-class Connection
+/**
+ * Создание класса Connection
+ */
+final class Connection
 {
-    private static ?self $conn = null;
+    /**
+     * Connection
+     * тип @var
+     */
+    private static ?Connection $conn = null;
 
-    private function __construct()
+    /**
+     * Подключение к базе данных и возврат экземпляра объекта \PDO
+     * @return \PDO
+     * @throws \Exception
+     */
+    public function connect()
     {
-    }
+        // чтение параметров в файле конфигурации ini
+        $params = parse_ini_file('database.ini');
+        if ($params === false) {
+            throw new \Exception("Error reading database configuration file");
+        }
 
-    public function connect(): PDO
-    {
-        $databaseUrl = parse_ini_file('database.ini');
-
-        $dsn = sprintf(
+        // подключение к базе данных postgresql
+        $conStr = sprintf(
             "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
-            $databaseUrl['host'],
-            $databaseUrl['port'],
-            $databaseUrl['database'],
-            $databaseUrl['user'],
-            $databaseUrl['pass']
+            $params['host'],
+            $params['port'],
+            $params['database'],
+            $params['user'],
+            $params['password']
         );
 
-        $pdo = new PDO($dsn);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = new \PDO($conStr);
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         return $pdo;
     }
 
-    public static function get(): self
+    /**
+     * возврат экземпляра объекта Connection
+     * тип @return
+     */
+    public static function get()
     {
-        if (!self::$conn) {
-            self::$conn = new self();
+        if (null === static::$conn) {
+            static::$conn = new self();
         }
 
-        return self::$conn;
+        return static::$conn;
+    }
+
+    protected function __construct()
+    {
+
     }
 }
