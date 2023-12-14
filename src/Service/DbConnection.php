@@ -16,15 +16,15 @@ class DbConnection
 
     public function connect(): PDO
     {
-        $databaseUrl = parse_url(getenv('DATABASE_URL') ? : '');
+        $databaseUrl = parse_ini_file('database.ini');
 
         $dsn = sprintf(
             "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
             $databaseUrl['host'],
             $databaseUrl['port'],
-            ltrim($databaseUrl['path'], '/'),
+            $databaseUrl['database'],
             $databaseUrl['user'],
-            $databaseUrl['pass']
+            $databaseUrl['password']
         );
 
         $pdo = new PDO($dsn);
