@@ -5,3 +5,6 @@ start:
 
 setup:
 	composer install
+
+migrate:
+	php bin/console migrate
