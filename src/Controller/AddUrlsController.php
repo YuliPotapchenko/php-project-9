@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\UrlRepositoryInterface;
-use App\Service\UrlNormalizer;
 use App\Service\UrlValidator;
 use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface;
@@ -25,7 +24,6 @@ class AddUrlsController
         private Messages $flash,
         private RouteCollectorInterface $routeCollector,
         private UrlRepositoryInterface $urlRepository,
-        private UrlNormalizer $urlNormalizer,
         private UrlValidator $urlValidator
     ) {
     }
@@ -40,7 +38,8 @@ class AddUrlsController
         $url = $request->getParsedBodyParam('url');
 
         if ($this->urlValidator->validate($url)) {
-            $url['name'] = $this->urlNormalizer->normalize($url['name']);
+            $parts = parse_url($url['name']);
+            $url['name'] = strtolower($parts['scheme'] . '://' . $parts['host']);
 
             if (!$existingUrl = $this->urlRepository->findOneByName($url['name'])) {
                 $url['created_at'] = (new DateTimeImmutable())->format('c');
