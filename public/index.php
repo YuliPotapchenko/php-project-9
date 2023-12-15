@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Controller\ListUrlsController;
 use App\Controller\ShowUrlsController;
 use App\Controller\AddUrlsController;
+use App\Controller\CheckUrlsController;
 use App\Controller\HomeController;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
@@ -41,5 +42,6 @@ $app->get('/', HomeController::class)->setName('home');
 $app->post('/urls', AddUrlsController::class)->setName('addUrl');
 $app->get('/urls/{id}', ShowUrlsController::class)->setName('url');
 $app->get('/urls', ListUrlsController::class)->setName('urls');
+$app->post('/urls/{id}/checks', CheckUrlsController::class)->setName('checkUrl');
 
 $app->run();
