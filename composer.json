@@ -27,6 +27,7 @@
         "vlucas/valitron": "^1.4",
         "vlucas/phpdotenv": "^5.5",
         "ext-pdo": "*",
+        "guzzlehttp/guzzle": "^7.5",
         "slim/flash": "^0.4.0"
     },
     "require-dev": {
