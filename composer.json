@@ -28,7 +28,9 @@
         "vlucas/phpdotenv": "^5.5",
         "ext-pdo": "*",
         "guzzlehttp/guzzle": "^7.5",
-        "slim/flash": "^0.4.0"
+        "slim/flash": "^0.4.0",
+        "imangazaliev/didom": "^2.0",
+        "illuminate/support": "^9.52"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.26",
