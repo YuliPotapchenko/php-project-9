@@ -15,10 +15,7 @@ class UrlChecker
     {
     }
 
-    /**
-     * @throws GuzzleException
-     * @throws InvalidSelectorException
-     */
+
     public function check(string $url): array
     {
         $data = [];
