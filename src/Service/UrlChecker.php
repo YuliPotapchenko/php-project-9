@@ -23,7 +23,7 @@ class UrlChecker
     {
         $data = [];
         $response = $this->httpClient->request('GET', $url, ['timeout' => 3]);
-
+        print_r($response);
         if($response->getStatusCode() == 200)
             $data = $this->extractDataFromContent($response->getBody()->getContents());
 
