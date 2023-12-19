@@ -57,11 +57,11 @@ class CheckUrlsController
             } catch (ConnectException) {
                 $this->flash->addMessage('error', 'Произошла ошибка при проверке, не удалось подключиться');
             } catch (RequestException) {
-                $checkResult = $this->urlChecker->check($url['name']);
-
-                $check = $this->buildNewCheck($urlId, $checkResult);
-
-                $this->urlCheckRepository->add($check);
+//                $checkResult = $this->urlChecker->check($url['name']);
+//
+//                $check = $this->buildNewCheck($urlId, $checkResult);
+//
+//                $this->urlCheckRepository->add($check);
 
                 $this->flash->addMessage('warning', 'Проверка была выполнена успешно, но сервер ответил с ошибкой');
             }
@@ -83,9 +83,9 @@ class CheckUrlsController
             'url_id'      => $urlId,
             'created_at'  => (new DateTimeImmutable())->format('c'),
             'status_code' => $checkResult['status_code'],
-//            'h1'          => ($checkResult['status_code'] == 200) ? $checkResult['h1'] : 'Доступ ограничен: проблема с IP',
-//            'title'       => ($checkResult['status_code'] == 200) ? $checkResult['title'] : 'Доступ ограничен: проблема с IP',
-//            'description' => ($checkResult['status_code'] == 200) ? $checkResult['description'] : '',
+            'h1'          => ($checkResult['status_code'] == 200) ? $checkResult['h1'] : 'Доступ ограничен: проблема с IP',
+            'title'       => ($checkResult['status_code'] == 200) ? $checkResult['title'] : 'Доступ ограничен: проблема с IP',
+            'description' => ($checkResult['status_code'] == 200) ? $checkResult['description'] : '',
         ];
     }
 }

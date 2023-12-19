@@ -23,9 +23,9 @@ class UrlChecker
     {
         $data = [];
         $response = $this->httpClient->request('GET', $url);
-        print_r($response);
-//        if($response->getStatusCode() == 200)
-//            $data = $this->extractDataFromContent($response->getBody()->getContents());
+
+        if($response->getStatusCode() == 200)
+            $data = $this->extractDataFromContent($response->getBody()->getContents());
 
         return array_merge(
             ['status_code' => $response->getStatusCode()],
