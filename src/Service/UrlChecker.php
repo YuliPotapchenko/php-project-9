@@ -21,9 +21,11 @@ class UrlChecker
      */
     public function check(string $url): array
     {
+        $data = [];
         $response = $this->httpClient->request('GET', $url, ['timeout' => 3]);
 
-        $data = $this->extractDataFromContent($response->getBody()->getContents());
+        if($response->getStatusCode() == 200)
+            $data = $this->extractDataFromContent($response->getBody()->getContents());
 
         return array_merge(
             ['status_code' => $response->getStatusCode()],

@@ -79,7 +79,6 @@ class CheckUrlsController
 
     private function buildNewCheck(string $urlId, array $checkResult): array
     {
-        print_r($checkResult);
         return [
             'url_id'      => $urlId,
             'created_at'  => (new DateTimeImmutable())->format('c'),
