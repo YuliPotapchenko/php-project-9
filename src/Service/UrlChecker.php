@@ -15,11 +15,14 @@ class UrlChecker
     {
     }
 
-
+    /**
+     * @throws GuzzleException
+     * @throws InvalidSelectorException
+     */
     public function check(string $url): array
     {
         $data = [];
-        $response = $this->httpClient->request('GET', $url, ['timeout' => 3]);
+        $response = $this->httpClient->request('GET', $url);
         print_r($response);
 //        if($response->getStatusCode() == 200)
 //            $data = $this->extractDataFromContent($response->getBody()->getContents());
