@@ -56,11 +56,12 @@ class CheckUrlsController
                 $this->flash->addMessage('success', 'Страница успешно проверена');
             } catch (ConnectException) {
                 $this->flash->addMessage('error', 'Произошла ошибка при проверке, не удалось подключиться');
-            } catch (RequestException) {
-                  $checkResult = $this->urlChecker->check($url['name']);
-//                $check = $this->buildNewCheck($urlId, $checkResult);
-//
-//                $this->urlCheckRepository->add($check);
+            } catch (RequestException $e) {
+                $checkResult = $e->getResponse();
+                print_r($checkResult);
+                $check = $this->buildNewCheck($urlId, $checkResult);
+
+                $this->urlCheckRepository->add($check);
 
                 $this->flash->addMessage('warning', 'Проверка была выполнена успешно, но сервер ответил с ошибкой');
             }
