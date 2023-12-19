@@ -84,9 +84,9 @@ class CheckUrlsController
             'url_id'      => $urlId,
             'created_at'  => (new DateTimeImmutable())->format('c'),
             'status_code' => $checkResult['status_code'],
-            'h1'          => $checkResult['h1'],
-            'title'       => $checkResult['title'],
-            'description' => $checkResult['description'],
+            'h1'          => ($checkResult['status_code'] == 200) ? $checkResult['h1'] : 'Доступ ограничен: проблема с IP',
+            'title'       => ($checkResult['status_code'] == 200) ? $checkResult['title'] : 'Доступ ограничен: проблема с IP',
+            'description' => ($checkResult['status_code'] == 200) ? $checkResult['description'] : '',
         ];
     }
 }
