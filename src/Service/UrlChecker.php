@@ -22,15 +22,16 @@ class UrlChecker
     public function check(string $url): array
     {
         $data = [];
-        $response = $this->httpClient->request('GET', $url);
-
-        if($response->getStatusCode() === 200)
-            $data = $this->extractDataFromContent($response->getBody()->getContents());
-
-        return array_merge(
-            ['status_code' => $response->getStatusCode()],
-            $data
-        );
+        print_r($url);
+//        $response = $this->httpClient->request('GET', $url);
+//
+//        if($response->getStatusCode() === 200)
+//            $data = $this->extractDataFromContent($response->getBody()->getContents());
+        return [];
+//        return array_merge(
+//            ['status_code' => $response->getStatusCode()],
+//            $data
+//        );
     }
 
     /**
