@@ -57,8 +57,7 @@ class CheckUrlsController
             } catch (ConnectException) {
                 $this->flash->addMessage('error', 'Произошла ошибка при проверке, не удалось подключиться');
             } catch (RequestException) {
-//                $checkResult = $this->urlChecker->check($url['name']);
-//
+                  $checkResult = $this->urlChecker->check($url['name']);
 //                $check = $this->buildNewCheck($urlId, $checkResult);
 //
 //                $this->urlCheckRepository->add($check);
