@@ -9,3 +9,9 @@
         {{ message }}
     </div>
 {% endfor %}
+
+{% for message in flashes.warning %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
