@@ -22,7 +22,7 @@ class UrlChecker
     public function check(string $url): array
     {
         $data = [];
-        print_r($url);
+        print_r($this->httpClient->request('GET', $url));
 //        $response = $this->httpClient->request('GET', $url);
 //
 //        if($response->getStatusCode() === 200)
