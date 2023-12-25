@@ -40,7 +40,7 @@ class DbUrlRepository implements UrlRepositoryInterface
         $stmt->execute();
 
         if (!$result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-            return ['mess' => "url не найден"];
+            throw new UrlNotFoundException('Url не найден');
         }
 
         return array_shift($result);
