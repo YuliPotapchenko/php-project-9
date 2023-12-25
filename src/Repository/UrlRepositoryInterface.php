@@ -10,9 +10,6 @@ interface UrlRepositoryInterface
 {
     public function add(array $url): string;
 
-    /**
-     * @throws UrlNotFoundException
-     */
     public function getOne(string $id): array;
 
     public function get(): array;
