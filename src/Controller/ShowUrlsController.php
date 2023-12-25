@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Exception\UrlNotFoundException;
 use App\Repository\UrlCheckRepositoryInterface;
 use App\Repository\UrlRepositoryInterface;
 use Exception;
@@ -44,6 +45,8 @@ class ShowUrlsController
             ];
 
             return $this->twig->render($response, 'app/urls/show.html.twig', $data);
+        }catch (UrlNotFoundException) {
+            return $this->twig->render($response->withStatus(404), 'app/404.html.twig');
         } catch (Exception) {
             return $this->twig->render($response->withStatus(500), 'app/500.html.twig');
         }
