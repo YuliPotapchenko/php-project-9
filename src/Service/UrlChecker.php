@@ -45,7 +45,7 @@ class UrlChecker
         return [
             'h1'          => ($h1) ? substr(optional($h1)->text(), 0, 255) : '',
             'title'       => ($title) ? substr(optional($title)->text(), 0, 255) : '',
-            'description' => ($description) ? substr($description->getAttribute('content'), 0, 255) : '',
+            'description' => ($description) ? substr((string)$description->getAttribute('content'), 0, 255) : '',
         ];
     }
 }
