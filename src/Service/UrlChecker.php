@@ -35,9 +35,12 @@ class UrlChecker
     private function extractDataFromContent(string $content): array
     {
         $this->document->loadHtml($content);
-        $h1 = $this->document->first('h1') ?? '';
-        $title = $this->document->first('title') ?? '';
-        $description = $this->document->first('meta[name="description"]') ?? '';
+        $h1 = $this->document->first('h1');
+        $title = $this->document->first('title');
+        $description = $this->document->first('meta[name="description"]');
+        $h1 = ($h1) ? $h1 : '';
+        $title = ($title) ? $title : '';
+        $description = ($description) ? $description : '';
 
         return [
             'h1'          => $h1 ? substr(optional($h1)->text(), 0, 255) : '',
