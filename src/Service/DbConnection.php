@@ -16,16 +16,35 @@ class DbConnection
 
     public function connect(): PDO
     {
-        $databaseUrl = parse_url(getenv('DATABASE_URL') ? : '');
+        $databaseUrl = parse_url($_ENV['DATABASE_URL']);
 
-        $dsn = sprintf(
-            "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
-            $databaseUrl['host'],
-            $databaseUrl['port'],
-            $databaseUrl['database'],
-            $databaseUrl['user'],
-            $databaseUrl['password']
-        );
+        if (!$databaseUrl) {
+            throw new \Exception("Error reading database url");
+        }
+        $host = $databaseUrl['host'] ?? '';
+        $port = $databaseUrl['port'] ?? '';
+        $name = $databaseUrl['path'] ? ltrim($databaseUrl['path'], '/') : '';
+        $user = $databaseUrl['user'] ?? '';
+        $pass = $databaseUrl['pass'] ?? '';
+
+        if ($port) {
+            $dsn = sprintf(
+                "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
+                $host,
+                $port,
+                $name,
+                $user,
+                $pass
+            );
+        } else {
+            $dsn = sprintf(
+                "pgsql:host=%s;dbname=%s;user=%s;password=%s",
+                $host,
+                $name,
+                $user,
+                $pass
+            );
+        }
 
         $pdo = new PDO($dsn);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
