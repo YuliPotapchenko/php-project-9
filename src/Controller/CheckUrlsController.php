@@ -63,6 +63,7 @@ class CheckUrlsController
 
                     $this->urlCheckRepository->add($check);
                 }
+
                 $this->flash->addMessage('warning', 'Проверка была выполнена успешно, но сервер ответил с ошибкой');
             }
 
