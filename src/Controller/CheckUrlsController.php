@@ -78,12 +78,13 @@ class CheckUrlsController
 
     private function buildNewCheck(string $urlId, array $checkResult): array
     {
+        $problemText401 = 'Доступ ограничен: проблема с IP';
         return [
             'url_id'      => $urlId,
             'created_at'  => (new DateTimeImmutable())->format('c'),
             'status_code' => $checkResult['status_code'],
-            'h1'          => ($checkResult['status_code'] == 200) ? $checkResult['h1'] : 'Доступ ограничен: проблема с IP',
-            'title'       => ($checkResult['status_code'] == 200) ? $checkResult['title'] : 'Доступ ограничен: проблема с IP',
+            'h1'          => ($checkResult['status_code'] == 200) ? $checkResult['h1'] : $problemText401,
+            'title'       => ($checkResult['status_code'] == 200) ? $checkResult['title'] : $problemText401,
             'description' => ($checkResult['status_code'] == 200) ? $checkResult['description'] : '',
         ];
     }

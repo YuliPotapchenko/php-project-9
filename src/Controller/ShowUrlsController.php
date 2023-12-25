@@ -44,9 +44,7 @@ class ShowUrlsController
             ];
 
             return $this->twig->render($response, 'app/urls/show.html.twig', $data);
-        }
-
-        catch (Exception) {
+        } catch (Exception) {
             return $this->twig->render($response->withStatus(500), 'app/500.html.twig');
         }
     }
