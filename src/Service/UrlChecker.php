@@ -38,14 +38,14 @@ class UrlChecker
         $h1 = $this->document->first('h1');
         $title = $this->document->first('title');
         $description = $this->document->first('meta[name="description"]');
-        $h1 = ($h1) ? $h1 : '';
-        $title = ($title) ? $title : '';
-        $description = ($description) ? $description : '';
+        $h1 = (isset($h1)) ? $h1 : '';
+        $title = (isset($title)) ? $title : '';
+        $description = (isset($description)) ? $description : '';
 
         return [
-            'h1'          => $h1 ? substr(optional($h1)->text(), 0, 255) : '',
-            'title'       => $title ? substr(optional($title)->text(), 0, 255) : '',
-            'description' => $description ? substr($description->getAttribute('content'), 0, 255) : '',
+            'h1'          => ($h1) ? substr(optional($h1)->text(), 0, 255) : '',
+            'title'       => ($title) ? substr(optional($title)->text(), 0, 255) : '',
+            'description' => ($description) ? substr($description->getAttribute('content'), 0, 255) : '',
         ];
     }
 }
