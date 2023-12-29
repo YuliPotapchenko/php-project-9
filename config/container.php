@@ -11,7 +11,7 @@ use Slim\Flash\Messages;
 use Slim\Views\Twig;
 
 return [
-    Twig::class                        => fn() => Twig::create('../templates'),
+    Twig::class                        => fn() => Twig::create(__DIR__.'/../templates'),
     Messages::class                    => fn() => new Messages(),
     PDO::class                         => fn() => DbConnection::get()->connect(),
     UrlRepositoryInterface::class      => DI\autowire(DbUrlRepository::class),
