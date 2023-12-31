@@ -14,22 +14,29 @@ class UrlFetcher
 
     public function getAllDetail(): array
     {
-        $sql = '
-            SELECT urls.id,
-               urls.name,
-               checks.created_at AS last_check_date,
-               checks.status_code
-            FROM urls
-            LEFT JOIN (
-                SELECT DISTINCT ON (url_id) url_id, created_at, status_code
+        $queryUrls = 'SELECT id, name FROM urls ORDER BY created_at DESC';
+
+        $queryChecks = '
+            SELECT url_id, created_at, status_code
+            FROM url_checks
+            WHERE (url_id, created_at) IN (
+                SELECT url_id, MAX(created_at)
                 FROM url_checks
-                ORDER BY url_id, created_at DESC) checks
-            ON urls.id = checks.url_id
-            ORDER BY urls.created_at DESC;';
+                GROUP BY url_id
+            )
+        ';
 
-        $stmt = $this->pdoConnection->prepare($sql);
-        $stmt->execute();
+        $urls = collect($this->pdoConnection->query($queryUrls)->fetchAll(PDO::FETCH_ASSOC));
+        $checks = collect($this->pdoConnection->query($queryChecks)->fetchAll(PDO::FETCH_ASSOC));
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $urls->map(function ($url) use ($checks) {
+            $check = $checks->where('url_id', $url['id'])->first();
+            return array_merge($url, [
+                'last_check_date' => $check['created_at'] ?? null,
+                'status_code' => $check['status_code'] ?? null,
+            ]);
+        });
+
+        return $result->all();
     }
 }
